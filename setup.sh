@@ -85,16 +85,20 @@ else
 
 
 
-	echo -e "\n${blueColour}[*] Starting installation of the tools...\n${endColour}"
-	sleep 0.5
-	mkdir ~/tools && cd ~/tools
+	echo -e "\n${purpleColour}[*] Installing dependencies for bspwm...\n${endColour}"
+sleep 2
+sudo apt install -y libxcb1-dev libxcb-keysyms1-dev libpango1.0-dev \
+  libxcb-util0-dev libxcb-icccm4-dev libyajl-dev libstartup-notification0-dev \
+  libxcb-randr0-dev libev-dev libxcb-cursor-dev libxcb-xinerama0-dev \
+  libxcb-xkb-dev libxkbcommon-dev libxkbcommon-x11-dev autoconf \
+  libxcb-xrm-dev libxcb-shape0-dev
 
-	echo -e "\n${purpleColour}[*] Installing bspwm...\n${endColour}"
-	sleep 2
-	git clone https://github.com/baskerville/bspwm.git
-	cd bspwm
-	make -j$(nproc)
-	sudo make install
+echo -e "\n${purpleColour}[*] Installing bspwm...\n${endColour}"
+sleep 2
+git clone https://github.com/baskerville/bspwm.git
+cd bspwm
+make -j$(nproc)
+sudo make install
 	if [ $? != 0 ] && [ $? != 130 ]; then
 		echo -e "\n${redColour}[-] Failed to install bspwm!\n${endColour}"
 		exit 1
